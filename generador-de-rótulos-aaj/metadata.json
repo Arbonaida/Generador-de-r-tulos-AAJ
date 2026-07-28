@@ -1,6 +1,0 @@
-{
-  "name": "Generador de rótulos AAJ",
-  "description": "Creador y animador de faldones profesionales (Lower Third) para vídeo vertical 9:16 con exportación MP4 para Adelante Jerez.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
