@@ -1,14 +1,37 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { LowerThirdConfig, SampleBackground, ActiveTab } from './types';
-import { DEFAULT_CONFIG, SAMPLE_BACKGROUNDS } from './data/defaults';
+import { LowerThirdConfig, SampleBackground, ActiveTab, SavedProfile } from './types';
+import { DEFAULT_CONFIG, SAMPLE_BACKGROUNDS, DEFAULT_PROFILES } from './data/defaults';
 import { Header } from './components/Header';
 import { PreviewCanvas } from './components/PreviewCanvas';
 import { EditorPanel } from './components/EditorPanel';
 import { ExportModal } from './components/ExportModal';
-import { Sparkles, Info, CheckCircle2, Sliders, Play, RotateCcw } from 'lucide-react';
+import { ProfileManagerModal } from './components/ProfileManagerModal';
+
+const LOCAL_STORAGE_PROFILES_KEY = 'aaj_rotulos_profiles_v1';
 
 export default function App() {
-  const [config, setConfig] = useState<LowerThirdConfig>(DEFAULT_CONFIG);
+  const [profiles, setProfiles] = useState<SavedProfile[]>(() => {
+    try {
+      const saved = localStorage.getItem(LOCAL_STORAGE_PROFILES_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
+        }
+      }
+    } catch (e) {
+      console.warn('Failed to load profiles from localStorage', e);
+    }
+    return DEFAULT_PROFILES;
+  });
+
+  const [activeProfileId, setActiveProfileId] = useState<string | null>(profiles[0]?.id || null);
+  const [isProfilesOpen, setIsProfilesOpen] = useState<boolean>(false);
+
+  const [config, setConfig] = useState<LowerThirdConfig>(() => {
+    return profiles[0]?.config || DEFAULT_CONFIG;
+  });
+
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isLooping, setIsLooping] = useState<boolean>(true);
@@ -24,6 +47,49 @@ export default function App() {
   const previewRef = useRef<HTMLDivElement>(null);
   const lastTimeRef = useRef<number | null>(null);
   const animFrameRef = useRef<number | null>(null);
+
+  // Persist profiles to localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem(LOCAL_STORAGE_PROFILES_KEY, JSON.stringify(profiles));
+    } catch (e) {
+      console.warn('Failed to save profiles to localStorage', e);
+    }
+  }, [profiles]);
+
+  const handleSelectProfile = (profile: SavedProfile) => {
+    setActiveProfileId(profile.id);
+    setConfig(profile.config);
+    setCurrentTime(0);
+    setIsPlaying(true);
+  };
+
+  const handleSaveProfile = (name: string) => {
+    const newProfile: SavedProfile = {
+      id: `custom-profile-${Date.now()}`,
+      name,
+      createdAt: Date.now(),
+      config: { ...config },
+      isDefault: false,
+    };
+    setProfiles((prev) => [newProfile, ...prev]);
+    setActiveProfileId(newProfile.id);
+  };
+
+  const handleDeleteProfile = (id: string) => {
+    setProfiles((prev) => prev.filter((p) => p.id !== id));
+    if (activeProfileId === id) {
+      setActiveProfileId(null);
+    }
+  };
+
+  const handleImportProfiles = (imported: SavedProfile[]) => {
+    setProfiles((prev) => {
+      const existingIds = new Set(prev.map((p) => p.id));
+      const filteredNew = imported.filter((p) => p && p.id && p.config && !existingIds.has(p.id));
+      return [...filteredNew, ...prev];
+    });
+  };
 
   // Precision animation clock
   useEffect(() => {
@@ -122,6 +188,8 @@ export default function App() {
     setIsPlaying(true);
   };
 
+  const activeProfile = profiles.find((p) => p.id === activeProfileId);
+
   return (
     <div className="min-h-screen bg-white text-slate-900 flex flex-col font-sans selection:bg-[#24C87F] selection:text-white">
       {/* Header */}
@@ -129,6 +197,8 @@ export default function App() {
         onOpenExport={() => setIsExportOpen(true)}
         onPlayAnimation={handlePlayAnimation}
         onResetDefaults={handleResetDefaults}
+        onOpenProfiles={() => setIsProfilesOpen(true)}
+        activeProfileName={activeProfile?.name}
       />
 
       {/* Main Workspace Layout */}
@@ -168,28 +238,21 @@ export default function App() {
             activeTab={activeTab}
             setActiveTab={setActiveTab}
           />
-
-          {/* Quick Specifications Box */}
-          <div className="p-4 bg-white border border-slate-200 rounded-2xl text-xs text-slate-900 space-y-2 shrink-0 shadow-sm">
-            <div className="flex items-center gap-2 font-bold text-slate-900">
-              <CheckCircle2 className="w-4 h-4 text-[#24C87F]" />
-              <span>Especificaciones de Animación Aplicadas</span>
-            </div>
-
-            <ul className="space-y-1 text-slate-700 pl-6 list-disc text-[11px]">
-              <li>
-                <strong className="text-slate-900 font-bold">0.0s - 1.5s (Entrada):</strong> Deslizamiento del cuadrado verde + despliegue horizontal del bloque blanco (#FFFFFF) con revelado de texto.
-              </li>
-              <li>
-                <strong className="text-slate-900 font-bold">1.5s - 6.0s (Pausa):</strong> Rótulo estático y perfectamente legible.
-              </li>
-              <li>
-                <strong className="text-slate-900 font-bold">6.0s - 7.0s (Salida):</strong> Recogida de derecha a izquierda tras el cuadrado verde y deslizamiento de salida.
-              </li>
-            </ul>
-          </div>
         </div>
       </main>
+
+      {/* Profile Manager Modal */}
+      <ProfileManagerModal
+        isOpen={isProfilesOpen}
+        onClose={() => setIsProfilesOpen(false)}
+        currentConfig={config}
+        profiles={profiles}
+        activeProfileId={activeProfileId}
+        onSelectProfile={handleSelectProfile}
+        onSaveProfile={handleSaveProfile}
+        onDeleteProfile={handleDeleteProfile}
+        onImportProfiles={handleImportProfiles}
+      />
 
       {/* Export Modal */}
       <ExportModal

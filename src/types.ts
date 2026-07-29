@@ -1,3 +1,11 @@
+export interface SavedProfile {
+  id: string;
+  name: string;
+  createdAt: number;
+  config: LowerThirdConfig;
+  isDefault?: boolean;
+}
+
 export interface LowerThirdConfig {
   // Text fields
   title: string; // Line 1

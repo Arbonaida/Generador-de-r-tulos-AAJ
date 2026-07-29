@@ -1,16 +1,20 @@
 import React from 'react';
-import { Download, Sparkles, Video, Play, RotateCcw, Info } from 'lucide-react';
+import { Download, Play, FolderOpen } from 'lucide-react';
 
 interface Props {
   onOpenExport: () => void;
   onPlayAnimation: () => void;
   onResetDefaults: () => void;
+  onOpenProfiles: () => void;
+  activeProfileName?: string;
 }
 
 export const Header: React.FC<Props> = ({
   onOpenExport,
   onPlayAnimation,
   onResetDefaults,
+  onOpenProfiles,
+  activeProfileName,
 }) => {
   return (
     <header className="px-4 sm:px-6 py-3 border-b border-white/20 bg-[#1c9860]/95 backdrop-blur-xl sticky top-0 z-40 flex flex-wrap items-center justify-between gap-3 shadow-lg shadow-black/10 text-white">
@@ -35,6 +39,20 @@ export const Header: React.FC<Props> = ({
 
       {/* Action Buttons */}
       <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-end">
+        <button
+          onClick={onOpenProfiles}
+          className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-white border border-white/30 text-xs font-semibold transition shadow-sm active:scale-95"
+          title="Gestor de perfiles guardados"
+        >
+          <FolderOpen className="w-3.5 h-3.5 text-white" />
+          <span>Gestor Perfiles</span>
+          {activeProfileName && (
+            <span className="hidden md:inline-block px-1.5 py-0.2 rounded bg-white/20 text-[10px] font-mono max-w-[120px] truncate">
+              {activeProfileName}
+            </span>
+          )}
+        </button>
+
         <button
           onClick={onPlayAnimation}
           className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-white border border-white/30 text-xs font-semibold transition shadow-sm active:scale-95"

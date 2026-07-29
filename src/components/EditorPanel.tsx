@@ -15,6 +15,8 @@ import {
   Maximize,
   Square,
   FileText,
+  UserCheck,
+  Megaphone,
 } from 'lucide-react';
 
 interface Props {
@@ -113,15 +115,49 @@ export const EditorPanel: React.FC<Props> = ({
         {/* TAB 1: TEXTS */}
         {activeTab === 'text' && (
           <div className="space-y-5">
-            {/* Font specs notice card */}
-            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between text-xs text-slate-900">
-              <div className="flex items-center gap-2">
-                <Type className="w-4 h-4 text-[#24C87F]" />
-                <span className="font-bold text-slate-900">Tipografía oficial AAJ</span>
+            {/* Quick Presets Selector */}
+            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+              <label className="block text-xs font-bold text-slate-900 flex items-center justify-between">
+                <span>Presets Rápidos:</span>
+                <span className="text-[10px] text-slate-500 font-normal">Aplicar plantilla</span>
+              </label>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <button
+                  onClick={() => {
+                    updateConfig('subtitle', 'Miembro de Coordinadora Local Jerez');
+                  }}
+                  className={`p-2.5 rounded-xl border text-left transition flex items-center gap-2 ${
+                    config.subtitle === 'Miembro de Coordinadora Local Jerez'
+                      ? 'border-[#24C87F] bg-[#24C87F]/10 ring-2 ring-[#24C87F] font-bold text-slate-900'
+                      : 'border-slate-200 bg-white hover:border-slate-300 text-slate-700'
+                  }`}
+                >
+                  <UserCheck className="w-4 h-4 text-[#24C87F] shrink-0" />
+                  <div className="text-[11px] leading-tight">
+                    <span className="font-bold block text-slate-900">Coordinadora Local</span>
+                    <span className="text-[10px] text-slate-500 truncate block">Miembro de Coordinadora Local Jerez</span>
+                  </div>
+                </button>
+
+                <button
+                  onClick={() => {
+                    updateConfig('title', 'Carlos Fernández');
+                    updateConfig('subtitle', 'Portavoz de Adelante Jerez');
+                  }}
+                  className={`p-2.5 rounded-xl border text-left transition flex items-center gap-2 ${
+                    config.subtitle === 'Portavoz de Adelante Jerez'
+                      ? 'border-[#24C87F] bg-[#24C87F]/10 ring-2 ring-[#24C87F] font-bold text-slate-900'
+                      : 'border-slate-200 bg-white hover:border-slate-300 text-slate-700'
+                  }`}
+                >
+                  <Megaphone className="w-4 h-4 text-[#24C87F] shrink-0" />
+                  <div className="text-[11px] leading-tight">
+                    <span className="font-bold block text-slate-900">Portavoces</span>
+                    <span className="text-[10px] text-slate-500 truncate block">Carlos Fernández / Portavoz</span>
+                  </div>
+                </button>
               </div>
-              <span className="text-[11px] font-mono text-white bg-[#24C87F] px-2.5 py-0.5 rounded border border-[#24C87F] font-bold shadow-sm">
-                Clash Display
-              </span>
             </div>
 
             <div>
@@ -133,7 +169,7 @@ export const EditorPanel: React.FC<Props> = ({
                 type="text"
                 value={config.title}
                 onChange={(e) => updateConfig('title', e.target.value)}
-                placeholder="Ej: Carlos Fernández"
+                placeholder="Ej: Magdalena Bello"
                 className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder-slate-400 text-sm font-medium focus:outline-none focus:border-[#24C87F] focus:ring-1 focus:ring-[#24C87F] transition shadow-sm"
               />
             </div>
@@ -147,7 +183,7 @@ export const EditorPanel: React.FC<Props> = ({
                 type="text"
                 value={config.subtitle}
                 onChange={(e) => updateConfig('subtitle', e.target.value)}
-                placeholder="Ej: Portavoz de Adelante Jerez"
+                placeholder="Ej: Miembro de Coordinadora Local Jerez"
                 className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder-slate-400 text-sm font-medium focus:outline-none focus:border-[#24C87F] focus:ring-1 focus:ring-[#24C87F] transition shadow-sm"
               />
             </div>
@@ -246,7 +282,7 @@ export const EditorPanel: React.FC<Props> = ({
 
               <div className="flex items-center gap-4">
                 <div
-                  className="w-16 h-16 rounded-xl flex items-center justify-center overflow-hidden border border-slate-300 shadow-md shrink-0"
+                  className="w-16 h-16 rounded-xl flex items-center justify-center overflow-hidden border border-slate-300 shadow-md shrink-0 bg-[#24C87F]"
                   style={{ backgroundColor: config.squareBgColor }}
                 >
                   {config.useImage && config.squareImage ? (
@@ -265,7 +301,7 @@ export const EditorPanel: React.FC<Props> = ({
                 <div className="flex-1 space-y-2">
                   <label className="flex items-center justify-center gap-2 w-full px-3 py-2 rounded-xl bg-[#24C87F] text-white hover:bg-[#1fb874] text-xs font-bold cursor-pointer transition shadow-md">
                     <Upload className="w-4 h-4 text-white" />
-                    <span>Subir Imagen / Logo</span>
+                    <span>Subir Tu Propio Logo</span>
                     <input
                       type="file"
                       accept="image/*"
@@ -277,11 +313,63 @@ export const EditorPanel: React.FC<Props> = ({
                   {config.squareImage && (
                     <button
                       onClick={onClearImage}
-                      className="w-full text-center text-xs text-red-600 hover:text-red-700 py-1 underline transition"
+                      className="w-full text-center text-xs text-slate-600 hover:text-slate-800 py-1 underline transition"
                     >
-                      Usar color sólido e iniciales
+                      Quitar imagen (Usar iniciales)
                     </button>
                   )}
+                </div>
+              </div>
+
+              {/* Predefined Logos Selector */}
+              <div className="pt-2 border-t border-slate-200">
+                <label className="block text-xs font-semibold text-slate-900 mb-2">
+                  Logos Predefinidos (Selección Rápida):
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    onClick={() => {
+                      updateConfig('squareImage', '/logo-aaj.jpg');
+                      updateConfig('useImage', true);
+                    }}
+                    className={`p-2 rounded-xl border flex items-center gap-2 text-left transition ${
+                      config.useImage && config.squareImage === '/logo-aaj.jpg'
+                        ? 'border-[#24C87F] bg-[#24C87F]/10 ring-2 ring-[#24C87F] font-bold text-slate-900'
+                        : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
+                    }`}
+                  >
+                    <img
+                      src="/logo-aaj.jpg"
+                      alt="Logo AAJ Oficial"
+                      className="w-8 h-8 rounded-lg object-cover border border-slate-200 shrink-0"
+                    />
+                    <div className="text-[11px] leading-tight">
+                      <span className="font-bold block text-slate-900">Estrella AAJ</span>
+                      <span className="text-[10px] text-slate-500">Logo Oficial</span>
+                    </div>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      updateConfig('squareImage', '/logo-aaj-star.svg');
+                      updateConfig('useImage', true);
+                    }}
+                    className={`p-2 rounded-xl border flex items-center gap-2 text-left transition ${
+                      config.useImage && config.squareImage === '/logo-aaj-star.svg'
+                        ? 'border-[#24C87F] bg-[#24C87F]/10 ring-2 ring-[#24C87F] font-bold text-slate-900'
+                        : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
+                    }`}
+                  >
+                    <img
+                      src="/logo-aaj-star.svg"
+                      alt="Logo Vectorial AAJ"
+                      className="w-8 h-8 rounded-lg object-cover border border-slate-200 shrink-0 bg-[#24C87F]"
+                    />
+                    <div className="text-[11px] leading-tight">
+                      <span className="font-bold block text-slate-900">Vectorial SVG</span>
+                      <span className="text-[10px] text-slate-500">Formato Limpio</span>
+                    </div>
+                  </button>
                 </div>
               </div>
 

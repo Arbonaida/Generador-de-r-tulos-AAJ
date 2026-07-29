@@ -1,4 +1,4 @@
-import { LowerThirdConfig, SampleBackground } from '../types';
+import { LowerThirdConfig, SampleBackground, SavedProfile } from '../types';
 
 export const DEFAULT_CONFIG: LowerThirdConfig = {
   title: 'Carlos Fernández',
@@ -7,23 +7,52 @@ export const DEFAULT_CONFIG: LowerThirdConfig = {
   titleSizeRatio: 1,
   subtitleSizeRatio: 1,
 
-  squareBgColor: '#004242',
-  squareImage: null,
-  squareInitials: 'CF',
-  useImage: false,
+  squareBgColor: '#24C87F',
+  squareImage: '/logo-aaj.jpg',
+  squareInitials: 'AAJ',
+  useImage: true,
 
   whiteBlockBgColor: '#FFFFFF',
 
   bottomPercent: 16,
-  leftPercent: 6,
+  leftPercent: 7,
   overallScale: 1.0,
-  squareSize: 130,
+  squareSize: 105,
 
   slideInDuration: 0.6,
   revealDuration: 0.9,
   holdEndTime: 6.0,
   totalDuration: 7.0,
 };
+
+export const DEFAULT_PROFILES: SavedProfile[] = [
+  {
+    id: 'preset-coordinadora-local',
+    name: 'Miembros de Coordinadora Local',
+    createdAt: Date.now(),
+    isDefault: true,
+    config: {
+      ...DEFAULT_CONFIG,
+      title: 'Nombre y Apellidos',
+      subtitle: 'Miembro de Coordinadora Local Jerez',
+      squareImage: '/logo-aaj.jpg',
+      useImage: true,
+    },
+  },
+  {
+    id: 'preset-portavoces',
+    name: 'Portavoces',
+    createdAt: Date.now() - 1000,
+    isDefault: true,
+    config: {
+      ...DEFAULT_CONFIG,
+      title: 'Carlos Fernández',
+      subtitle: 'Portavoz de Adelante Jerez',
+      squareImage: '/logo-aaj.jpg',
+      useImage: true,
+    },
+  },
+];
 
 export const SAMPLE_BACKGROUNDS: SampleBackground[] = [
   {
