@@ -123,7 +123,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-white text-slate-900 flex flex-col font-sans selection:bg-[#24C87F] selection:text-white">
       {/* Header */}
       <Header
         onOpenExport={() => setIsExportOpen(true)}
@@ -170,21 +170,21 @@ export default function App() {
           />
 
           {/* Quick Specifications Box */}
-          <div className="p-4 bg-slate-900/80 border border-slate-800/80 rounded-2xl text-xs text-slate-300 space-y-2 shrink-0">
-            <div className="flex items-center gap-2 font-semibold text-teal-400">
-              <CheckCircle2 className="w-4 h-4" />
+          <div className="p-4 bg-white border border-slate-200 rounded-2xl text-xs text-slate-900 space-y-2 shrink-0 shadow-sm">
+            <div className="flex items-center gap-2 font-bold text-slate-900">
+              <CheckCircle2 className="w-4 h-4 text-[#24C87F]" />
               <span>Especificaciones de Animación Aplicadas</span>
             </div>
 
-            <ul className="space-y-1 text-slate-400 pl-6 list-disc text-[11px]">
+            <ul className="space-y-1 text-slate-700 pl-6 list-disc text-[11px]">
               <li>
-                <strong className="text-slate-200">0.0s - 1.5s (Entrada):</strong> Deslizamiento del cuadrado verde + despliegue horizontal del bloque blanco (#FFFFFF) con revelado de texto de izquierda a derecha.
+                <strong className="text-slate-900 font-bold">0.0s - 1.5s (Entrada):</strong> Deslizamiento del cuadrado verde + despliegue horizontal del bloque blanco (#FFFFFF) con revelado de texto.
               </li>
               <li>
-                <strong className="text-slate-200">1.5s - 6.0s (Pausa):</strong> Rótulo estático y perfectamente legible.
+                <strong className="text-slate-900 font-bold">1.5s - 6.0s (Pausa):</strong> Rótulo estático y perfectamente legible.
               </li>
               <li>
-                <strong className="text-slate-200">6.0s - 7.0s (Salida):</strong> Recogida de derecha a izquierda tras el cuadrado verde y deslizamiento de salida.
+                <strong className="text-slate-900 font-bold">6.0s - 7.0s (Salida):</strong> Recogida de derecha a izquierda tras el cuadrado verde y deslizamiento de salida.
               </li>
             </ul>
           </div>

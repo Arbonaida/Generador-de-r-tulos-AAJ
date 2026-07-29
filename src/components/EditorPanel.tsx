@@ -56,54 +56,54 @@ export const EditorPanel: React.FC<Props> = ({
   };
 
   return (
-    <div className="flex flex-col h-full bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl">
+    <div className="flex flex-col h-full bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xl text-slate-900">
       {/* Tab Navigation Header */}
-      <div className="flex items-center border-b border-slate-800 bg-slate-950/60 p-1.5 gap-1 overflow-x-auto">
+      <div className="flex items-center border-b border-slate-200 bg-slate-50 p-1.5 gap-1 overflow-x-auto">
         <button
           onClick={() => setActiveTab('text')}
-          className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition whitespace-nowrap ${
+          className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold transition whitespace-nowrap ${
             activeTab === 'text'
-              ? 'bg-teal-500/20 text-teal-300 border border-teal-500/40'
-              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+              ? 'bg-[#24C87F] text-white font-bold shadow-md'
+              : 'text-slate-700 hover:text-slate-900 hover:bg-slate-200/60'
           }`}
         >
-          <Type className="w-4 h-4 text-teal-400" />
+          <Type className={`w-4 h-4 ${activeTab === 'text' ? 'text-white' : 'text-slate-700'}`} />
           <span>Textos</span>
         </button>
 
         <button
           onClick={() => setActiveTab('graphic')}
-          className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition whitespace-nowrap ${
+          className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold transition whitespace-nowrap ${
             activeTab === 'graphic'
-              ? 'bg-teal-500/20 text-teal-300 border border-teal-500/40'
-              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+              ? 'bg-[#24C87F] text-white font-bold shadow-md'
+              : 'text-slate-700 hover:text-slate-900 hover:bg-slate-200/60'
           }`}
         >
-          <Square className="w-4 h-4 text-teal-400" />
+          <Square className={`w-4 h-4 ${activeTab === 'graphic' ? 'text-white' : 'text-slate-700'}`} />
           <span>Bloques y Logo</span>
         </button>
 
         <button
           onClick={() => setActiveTab('position')}
-          className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition whitespace-nowrap ${
+          className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold transition whitespace-nowrap ${
             activeTab === 'position'
-              ? 'bg-teal-500/20 text-teal-300 border border-teal-500/40'
-              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+              ? 'bg-[#24C87F] text-white font-bold shadow-md'
+              : 'text-slate-700 hover:text-slate-900 hover:bg-slate-200/60'
           }`}
         >
-          <Layout className="w-4 h-4 text-teal-400" />
+          <Layout className={`w-4 h-4 ${activeTab === 'position' ? 'text-white' : 'text-slate-700'}`} />
           <span>Posición</span>
         </button>
 
         <button
           onClick={() => setActiveTab('background')}
-          className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition whitespace-nowrap ${
+          className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold transition whitespace-nowrap ${
             activeTab === 'background'
-              ? 'bg-teal-500/20 text-teal-300 border border-teal-500/40'
-              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+              ? 'bg-[#24C87F] text-white font-bold shadow-md'
+              : 'text-slate-700 hover:text-slate-900 hover:bg-slate-200/60'
           }`}
         >
-          <Video className="w-4 h-4 text-teal-400" />
+          <Video className={`w-4 h-4 ${activeTab === 'background' ? 'text-white' : 'text-slate-700'}`} />
           <span>Fondo</span>
         </button>
       </div>
@@ -113,37 +113,48 @@ export const EditorPanel: React.FC<Props> = ({
         {/* TAB 1: TEXTS */}
         {activeTab === 'text' && (
           <div className="space-y-5">
+            {/* Font specs notice card */}
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between text-xs text-slate-900">
+              <div className="flex items-center gap-2">
+                <Type className="w-4 h-4 text-[#24C87F]" />
+                <span className="font-bold text-slate-900">Tipografía oficial AAJ</span>
+              </div>
+              <span className="text-[11px] font-mono text-white bg-[#24C87F] px-2.5 py-0.5 rounded border border-[#24C87F] font-bold shadow-sm">
+                Clash Display
+              </span>
+            </div>
+
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-2 flex items-center justify-between">
+              <label className="block text-xs font-semibold text-slate-900 mb-2 flex items-center justify-between">
                 <span>Texto Principal (Línea 1)</span>
-                <span className="text-[10px] text-teal-400 font-mono">Clash Display Bold</span>
+                <span className="text-[10px] text-[#188e5a] font-mono bg-[#24C87F]/10 px-1.5 py-0.5 rounded border border-[#24C87F]/30 font-bold">Clash Display Bold (700)</span>
               </label>
               <input
                 type="text"
                 value={config.title}
                 onChange={(e) => updateConfig('title', e.target.value)}
                 placeholder="Ej: Carlos Fernández"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 placeholder-slate-500 text-sm font-medium focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder-slate-400 text-sm font-medium focus:outline-none focus:border-[#24C87F] focus:ring-1 focus:ring-[#24C87F] transition shadow-sm"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-2 flex items-center justify-between">
+              <label className="block text-xs font-semibold text-slate-900 mb-2 flex items-center justify-between">
                 <span>Subtexto / Cargo (Línea 2)</span>
-                <span className="text-[10px] text-teal-400 font-mono">Clash Display Light</span>
+                <span className="text-[10px] text-[#188e5a] font-mono bg-[#24C87F]/10 px-1.5 py-0.5 rounded border border-[#24C87F]/30 font-bold">Clash Display Medium (500)</span>
               </label>
               <input
                 type="text"
                 value={config.subtitle}
                 onChange={(e) => updateConfig('subtitle', e.target.value)}
                 placeholder="Ej: Portavoz de Adelante Jerez"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 placeholder-slate-500 text-sm font-medium focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder-slate-400 text-sm font-medium focus:outline-none focus:border-[#24C87F] focus:ring-1 focus:ring-[#24C87F] transition shadow-sm"
               />
             </div>
 
             {/* Text Color Picker */}
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-2">
+              <label className="block text-xs font-semibold text-slate-900 mb-2">
                 Color de los Textos
               </label>
               <div className="flex items-center gap-3">
@@ -157,7 +168,7 @@ export const EditorPanel: React.FC<Props> = ({
                   type="text"
                   value={config.textColor}
                   onChange={(e) => updateConfig('textColor', e.target.value)}
-                  className="w-28 px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-xs font-mono text-slate-200"
+                  className="w-28 px-3 py-1.5 rounded-xl bg-white border border-slate-200 text-xs font-mono text-slate-900 shadow-sm"
                 />
               </div>
 
@@ -167,10 +178,10 @@ export const EditorPanel: React.FC<Props> = ({
                   <button
                     key={p.value}
                     onClick={() => updateConfig('textColor', p.value)}
-                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-[11px] text-slate-300 border border-slate-700 transition"
+                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white hover:bg-slate-50 text-[11px] text-slate-800 border border-slate-200 transition shadow-sm"
                   >
                     <span
-                      className="w-2.5 h-2.5 rounded-full border border-slate-600"
+                      className="w-2.5 h-2.5 rounded-full border border-slate-300"
                       style={{ backgroundColor: p.value }}
                     />
                     <span>{p.name}</span>
@@ -180,11 +191,11 @@ export const EditorPanel: React.FC<Props> = ({
             </div>
 
             {/* Font Size Scaling */}
-            <div className="space-y-4 pt-2 border-t border-slate-800">
+            <div className="space-y-4 pt-2 border-t border-slate-200">
               <div>
-                <div className="flex justify-between text-xs text-slate-300 font-medium mb-1.5">
+                <div className="flex justify-between text-xs text-slate-900 font-medium mb-1.5">
                   <span>Tamaño Nombre Principal</span>
-                  <span className="font-mono text-teal-400">
+                  <span className="font-mono text-[#188e5a] font-bold">
                     {Math.round(config.titleSizeRatio * 100)}%
                   </span>
                 </div>
@@ -197,14 +208,14 @@ export const EditorPanel: React.FC<Props> = ({
                   onChange={(e) =>
                     updateConfig('titleSizeRatio', parseFloat(e.target.value))
                   }
-                  className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-400"
+                  className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#24C87F]"
                 />
               </div>
 
               <div>
-                <div className="flex justify-between text-xs text-slate-300 font-medium mb-1.5">
+                <div className="flex justify-between text-xs text-slate-900 font-medium mb-1.5">
                   <span>Tamaño Subtexto</span>
-                  <span className="font-mono text-teal-400">
+                  <span className="font-mono text-[#188e5a] font-bold">
                     {Math.round(config.subtitleSizeRatio * 100)}%
                   </span>
                 </div>
@@ -217,7 +228,7 @@ export const EditorPanel: React.FC<Props> = ({
                   onChange={(e) =>
                     updateConfig('subtitleSizeRatio', parseFloat(e.target.value))
                   }
-                  className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-400"
+                  className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#24C87F]"
                 />
               </div>
             </div>
@@ -228,14 +239,14 @@ export const EditorPanel: React.FC<Props> = ({
         {activeTab === 'graphic' && (
           <div className="space-y-6">
             {/* Left Block Image / Logo */}
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-4">
-              <label className="block text-xs font-semibold text-slate-200">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-4 text-slate-900 shadow-sm">
+              <label className="block text-xs font-semibold text-slate-900">
                 Bloque Izquierdo (Cuadrado / Imagen)
               </label>
 
               <div className="flex items-center gap-4">
                 <div
-                  className="w-16 h-16 rounded-xl flex items-center justify-center overflow-hidden border border-slate-700 shadow-md shrink-0"
+                  className="w-16 h-16 rounded-xl flex items-center justify-center overflow-hidden border border-slate-300 shadow-md shrink-0"
                   style={{ backgroundColor: config.squareBgColor }}
                 >
                   {config.useImage && config.squareImage ? (
@@ -252,8 +263,8 @@ export const EditorPanel: React.FC<Props> = ({
                 </div>
 
                 <div className="flex-1 space-y-2">
-                  <label className="flex items-center justify-center gap-2 w-full px-3 py-2 rounded-xl bg-teal-500/20 hover:bg-teal-500/30 text-teal-300 border border-teal-500/40 text-xs font-semibold cursor-pointer transition">
-                    <Upload className="w-4 h-4" />
+                  <label className="flex items-center justify-center gap-2 w-full px-3 py-2 rounded-xl bg-[#24C87F] text-white hover:bg-[#1fb874] text-xs font-bold cursor-pointer transition shadow-md">
+                    <Upload className="w-4 h-4 text-white" />
                     <span>Subir Imagen / Logo</span>
                     <input
                       type="file"
@@ -266,7 +277,7 @@ export const EditorPanel: React.FC<Props> = ({
                   {config.squareImage && (
                     <button
                       onClick={onClearImage}
-                      className="w-full text-center text-xs text-red-400 hover:text-red-300 py-1 transition"
+                      className="w-full text-center text-xs text-red-600 hover:text-red-700 py-1 underline transition"
                     >
                       Usar color sólido e iniciales
                     </button>
@@ -276,7 +287,7 @@ export const EditorPanel: React.FC<Props> = ({
 
               {!config.useImage && (
                 <div className="pt-2">
-                  <label className="block text-[11px] font-medium text-slate-400 mb-1">
+                  <label className="block text-[11px] font-medium text-slate-700 mb-1">
                     Iniciales / Símbolo si no hay imagen:
                   </label>
                   <input
@@ -285,7 +296,7 @@ export const EditorPanel: React.FC<Props> = ({
                     value={config.squareInitials}
                     onChange={(e) => updateConfig('squareInitials', e.target.value)}
                     placeholder="Ej: CF"
-                    className="w-24 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-slate-200 font-bold uppercase"
+                    className="w-24 px-3 py-1.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-900 font-bold uppercase shadow-sm"
                   />
                 </div>
               )}
@@ -293,7 +304,7 @@ export const EditorPanel: React.FC<Props> = ({
 
             {/* Left Square Background Color */}
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-2">
+              <label className="block text-xs font-semibold text-slate-900 mb-2">
                 Color del Cuadrado Izquierdo
               </label>
               <div className="flex items-center gap-3">
@@ -307,14 +318,14 @@ export const EditorPanel: React.FC<Props> = ({
                   type="text"
                   value={config.squareBgColor}
                   onChange={(e) => updateConfig('squareBgColor', e.target.value)}
-                  className="w-28 px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-xs font-mono text-slate-200"
+                  className="w-28 px-3 py-1.5 rounded-xl bg-white border border-slate-200 text-xs font-mono text-slate-900 shadow-sm"
                 />
               </div>
             </div>
 
             {/* Right Block Background Color */}
-            <div className="pt-4 border-t border-slate-800">
-              <label className="block text-xs font-semibold text-slate-300 mb-2">
+            <div className="pt-4 border-t border-slate-200">
+              <label className="block text-xs font-semibold text-slate-900 mb-2">
                 Color del Bloque Derecho (#FFFFFF)
               </label>
               <div className="flex items-center gap-3">
@@ -328,7 +339,7 @@ export const EditorPanel: React.FC<Props> = ({
                   type="text"
                   value={config.whiteBlockBgColor}
                   onChange={(e) => updateConfig('whiteBlockBgColor', e.target.value)}
-                  className="w-28 px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-xs font-mono text-slate-200"
+                  className="w-28 px-3 py-1.5 rounded-xl bg-white border border-slate-200 text-xs font-mono text-slate-900 shadow-sm"
                 />
               </div>
             </div>
@@ -339,9 +350,9 @@ export const EditorPanel: React.FC<Props> = ({
         {activeTab === 'position' && (
           <div className="space-y-5">
             <div>
-              <div className="flex justify-between text-xs text-slate-300 font-medium mb-1.5">
+              <div className="flex justify-between text-xs text-slate-900 font-medium mb-1.5">
                 <span>Posición Vertical (% desde abajo)</span>
-                <span className="font-mono text-teal-400">
+                <span className="font-mono text-[#188e5a] font-bold">
                   {config.bottomPercent}%
                 </span>
               </div>
@@ -354,14 +365,14 @@ export const EditorPanel: React.FC<Props> = ({
                 onChange={(e) =>
                   updateConfig('bottomPercent', parseInt(e.target.value, 10))
                 }
-                className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-400"
+                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#24C87F]"
               />
             </div>
 
             <div>
-              <div className="flex justify-between text-xs text-slate-300 font-medium mb-1.5">
+              <div className="flex justify-between text-xs text-slate-900 font-medium mb-1.5">
                 <span>Margen Izquierdo (% desde la izquierda)</span>
-                <span className="font-mono text-teal-400">
+                <span className="font-mono text-[#188e5a] font-bold">
                   {config.leftPercent}%
                 </span>
               </div>
@@ -374,14 +385,14 @@ export const EditorPanel: React.FC<Props> = ({
                 onChange={(e) =>
                   updateConfig('leftPercent', parseInt(e.target.value, 10))
                 }
-                className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-400"
+                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#24C87F]"
               />
             </div>
 
             <div>
-              <div className="flex justify-between text-xs text-slate-300 font-medium mb-1.5">
+              <div className="flex justify-between text-xs text-slate-900 font-medium mb-1.5">
                 <span>Escala General del Rótulo</span>
-                <span className="font-mono text-teal-400">
+                <span className="font-mono text-[#188e5a] font-bold">
                   {Math.round(config.overallScale * 100)}%
                 </span>
               </div>
@@ -394,14 +405,14 @@ export const EditorPanel: React.FC<Props> = ({
                 onChange={(e) =>
                   updateConfig('overallScale', parseFloat(e.target.value))
                 }
-                className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-400"
+                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#24C87F]"
               />
             </div>
 
             <div>
-              <div className="flex justify-between text-xs text-slate-300 font-medium mb-1.5">
+              <div className="flex justify-between text-xs text-slate-900 font-medium mb-1.5">
                 <span>Altura del Rótulo / Altura del Cuadrado</span>
-                <span className="font-mono text-teal-400">
+                <span className="font-mono text-[#188e5a] font-bold">
                   {config.squareSize}px
                 </span>
               </div>
@@ -414,7 +425,7 @@ export const EditorPanel: React.FC<Props> = ({
                 onChange={(e) =>
                   updateConfig('squareSize', parseInt(e.target.value, 10))
                 }
-                className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-400"
+                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#24C87F]"
               />
             </div>
           </div>
@@ -424,10 +435,10 @@ export const EditorPanel: React.FC<Props> = ({
         {activeTab === 'background' && (
           <div className="space-y-6">
             {/* Dedicated Solid Color Picker Section */}
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-4">
-              <label className="block text-xs font-semibold text-slate-200 flex items-center justify-between">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-4 text-slate-900 shadow-sm">
+              <label className="block text-xs font-semibold text-slate-900 flex items-center justify-between">
                 <span>Selector de Color Sólido</span>
-                <span className="text-[10px] text-teal-400 font-mono">
+                <span className="text-[10px] text-slate-900 font-mono bg-white px-2 py-0.5 rounded border border-slate-200 font-bold">
                   {selectedBg.type === 'color' ? selectedBg.url : 'Personalizado'}
                 </span>
               </label>
@@ -459,13 +470,13 @@ export const EditorPanel: React.FC<Props> = ({
                       url: color,
                     });
                   }}
-                  className="w-32 px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs font-mono text-slate-200 uppercase focus:outline-none focus:border-teal-500"
+                  className="w-32 px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-xs font-mono text-slate-900 uppercase focus:outline-none focus:border-[#24C87F]"
                 />
               </div>
 
               {/* Quick Solid Color Presets */}
               <div className="space-y-2">
-                <span className="block text-[11px] font-medium text-slate-400">
+                <span className="block text-[11px] font-medium text-slate-700">
                   Ajustes rápidos de color sólido:
                 </span>
                 <div className="flex flex-wrap gap-2">
@@ -490,12 +501,12 @@ export const EditorPanel: React.FC<Props> = ({
                       className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs transition border ${
                         selectedBg.type === 'color' &&
                         selectedBg.url.toLowerCase() === preset.value.toLowerCase()
-                          ? 'bg-teal-500/20 text-teal-300 border-teal-500/50'
-                          : 'bg-slate-900 text-slate-300 border-slate-800 hover:border-slate-700'
+                          ? 'bg-[#24C87F] text-white border-[#24C87F] font-bold'
+                          : 'bg-white text-slate-800 border-slate-200 hover:bg-slate-50'
                       }`}
                     >
                       <span
-                        className="w-3 h-3 rounded-full border border-slate-600 shrink-0"
+                        className="w-3 h-3 rounded-full border border-slate-300 shrink-0"
                         style={{ backgroundColor: preset.value }}
                       />
                       <span>{preset.name}</span>
@@ -507,7 +518,7 @@ export const EditorPanel: React.FC<Props> = ({
 
             {/* Presets and Sample Backgrounds */}
             <div>
-              <p className="text-xs text-slate-400 leading-relaxed mb-3">
+              <p className="text-xs text-slate-700 leading-relaxed mb-3">
                 Selecciona una plantilla o fondo de prueba para comprobar el contraste en formato vertical 9:16:
               </p>
 
@@ -518,23 +529,23 @@ export const EditorPanel: React.FC<Props> = ({
                     onClick={() => setSelectedBg(bg)}
                     className={`p-3 rounded-xl border flex flex-col gap-2 text-left transition ${
                       selectedBg.id === bg.id
-                        ? 'border-teal-500 bg-teal-500/10 text-white ring-1 ring-teal-500'
-                        : 'border-slate-800 bg-slate-950/60 text-slate-300 hover:border-slate-700'
+                        ? 'border-[#24C87F] bg-[#24C87F]/10 text-slate-900 ring-2 ring-[#24C87F] font-bold'
+                        : 'border-slate-200 bg-slate-50 text-slate-800 hover:border-[#24C87F]/50'
                     }`}
                   >
                     <div
-                      className="w-full h-16 rounded-lg overflow-hidden flex items-center justify-center border border-slate-700/50"
+                      className="w-full h-16 rounded-lg overflow-hidden flex items-center justify-center border border-slate-200"
                       style={{ background: bg.url }}
                     >
                       {bg.type === 'transparent' && (
-                        <span className="text-[10px] text-slate-400 font-mono">
+                        <span className="text-[10px] text-slate-800 font-mono bg-white/80 px-2 py-0.5 rounded shadow-sm">
                           Sin Fondo
                         </span>
                       )}
                       {bg.type === 'color' && (
                         <span
                           className={`text-[10px] font-mono px-2 py-0.5 rounded ${
-                            bg.url === '#ffffff' ? 'text-slate-900 bg-slate-200' : 'text-slate-300 bg-slate-900/80'
+                            bg.url === '#ffffff' ? 'text-slate-900 bg-slate-200' : 'text-white bg-black/60'
                           }`}
                         >
                           {bg.url}
@@ -553,12 +564,12 @@ export const EditorPanel: React.FC<Props> = ({
       </div>
 
       {/* Footer Reset */}
-      <div className="p-4 border-t border-slate-800 bg-slate-950/60 flex items-center justify-between">
+      <div className="p-4 border-t border-slate-200 bg-slate-50 flex items-center justify-between">
         <button
           onClick={onResetDefaults}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs transition"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-800 border border-slate-200 text-xs font-semibold transition shadow-sm"
         >
-          <RotateCcw className="w-3.5 h-3.5 text-slate-400" />
+          <RotateCcw className="w-3.5 h-3.5 text-slate-600" />
           <span>Restablecer Ajustes Originales</span>
         </button>
       </div>

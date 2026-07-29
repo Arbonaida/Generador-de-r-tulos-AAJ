@@ -554,18 +554,18 @@ export const ExportModal: React.FC<Props> = ({
         }}
       />
 
-      <div className="w-full max-w-lg bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+      <div className="w-full max-w-lg bg-white border border-slate-200 rounded-2xl shadow-2xl overflow-hidden flex flex-col text-slate-900">
         {/* Modal Header */}
-        <div className="px-6 py-4 bg-slate-950/80 border-b border-slate-800 flex items-center justify-between">
+        <div className="px-6 py-4 bg-[#1c9860] border-b border-[#157c4f] flex items-center justify-between text-white">
           <div className="flex items-center gap-2">
-            <div className="p-2 rounded-xl bg-teal-500/20 text-teal-400 border border-teal-500/30">
+            <div className="p-2 rounded-xl bg-white/20 text-white border border-white/30">
               <Download className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-100 text-sm">
+              <h3 className="font-bold text-white text-sm">
                 Exportar Rótulo Faldón 9:16
               </h3>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-white/80">
                 Calidad Ultra HD 1080 × 1920 px (60 FPS)
               </p>
             </div>
@@ -574,7 +574,7 @@ export const ExportModal: React.FC<Props> = ({
           <button
             onClick={onClose}
             disabled={isRendering}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition disabled:opacity-50"
+            className="p-1.5 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition disabled:opacity-50"
           >
             <X className="w-5 h-5" />
           </button>
@@ -583,18 +583,18 @@ export const ExportModal: React.FC<Props> = ({
         {/* Modal Content */}
         <div className="p-6 space-y-5">
           {errorMessage && (
-            <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+            <div className="p-4 rounded-xl bg-rose-50 border border-rose-300 text-rose-900 text-xs flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 shrink-0 mt-0.5 text-rose-600" />
               <div>
-                <p className="font-semibold text-rose-200">Error en el renderizado</p>
-                <p className="mt-1 leading-relaxed">{errorMessage}</p>
+                <p className="font-bold text-rose-900">Error en el renderizado</p>
+                <p className="mt-1 leading-relaxed text-rose-800">{errorMessage}</p>
               </div>
             </div>
           )}
 
           {!isRendering && !downloadUrl && (
             <>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <p className="text-xs text-slate-700 leading-relaxed">
                 Selecciona el formato de exportación preferido para tu editor de vídeo (Premiere, CapCut, DaVinci Resolve, Instagram, TikTok, etc.):
               </p>
 
@@ -604,19 +604,19 @@ export const ExportModal: React.FC<Props> = ({
                   onClick={() => setExportType('mp4-bg')}
                   className={`w-full p-4 rounded-xl border text-left transition flex items-start gap-3 ${
                     exportType === 'mp4-bg'
-                      ? 'border-teal-500 bg-teal-500/10 text-white ring-1 ring-teal-500'
-                      : 'border-slate-800 bg-slate-950/60 text-slate-300 hover:border-slate-700'
+                      ? 'border-[#24C87F] bg-[#24C87F]/10 text-slate-900 ring-2 ring-[#24C87F] font-bold'
+                      : 'border-slate-200 bg-slate-50 text-slate-800 hover:border-[#24C87F]/50'
                   }`}
                 >
-                  <Video className="w-5 h-5 text-teal-400 shrink-0 mt-0.5" />
+                  <Video className="w-5 h-5 text-[#24C87F] shrink-0 mt-0.5" />
                   <div>
-                    <div className="font-semibold text-xs text-slate-100 flex items-center gap-2">
+                    <div className="font-bold text-xs text-slate-900 flex items-center gap-2">
                       <span>Vídeo MP4 (.mp4) con Fondo Integrado / Sólido</span>
-                      <span className="px-2 py-0.5 rounded text-[10px] bg-teal-500/20 text-teal-300 font-mono font-bold">
+                      <span className="px-2 py-0.5 rounded text-[10px] bg-[#24C87F] text-white font-mono font-bold">
                         Recomendado MP4
                       </span>
                     </div>
-                    <p className="text-[11px] text-slate-400 mt-1">
+                    <p className="text-[11px] text-slate-600 font-normal mt-1">
                       Genera un vídeo MP4 de 7s (1080x1920 60 FPS H.264) compatible con CapCut, móvil, Instagram Reels y TikTok.
                     </p>
                   </div>
@@ -627,19 +627,19 @@ export const ExportModal: React.FC<Props> = ({
                   onClick={() => setExportType('mp4-transparent')}
                   className={`w-full p-4 rounded-xl border text-left transition flex items-start gap-3 ${
                     exportType === 'mp4-transparent'
-                      ? 'border-teal-500 bg-teal-500/10 text-white ring-1 ring-teal-500'
-                      : 'border-slate-800 bg-slate-950/60 text-slate-300 hover:border-slate-700'
+                      ? 'border-[#24C87F] bg-[#24C87F]/10 text-slate-900 ring-2 ring-[#24C87F] font-bold'
+                      : 'border-slate-200 bg-slate-50 text-slate-800 hover:border-[#24C87F]/50'
                   }`}
                 >
-                  <Film className="w-5 h-5 text-teal-400 shrink-0 mt-0.5" />
+                  <Film className="w-5 h-5 text-[#24C87F] shrink-0 mt-0.5" />
                   <div>
-                    <div className="font-semibold text-xs text-slate-100 flex items-center gap-2">
+                    <div className="font-bold text-xs text-slate-900 flex items-center gap-2">
                       <span>Vídeo MP4 (.mp4) sobre Fondo Negro</span>
-                      <span className="px-2 py-0.5 rounded text-[10px] bg-slate-800 text-slate-300 font-mono">
+                      <span className="px-2 py-0.5 rounded text-[10px] bg-white text-slate-800 font-mono border border-slate-200 font-semibold">
                         MP4 H.264
                       </span>
                     </div>
-                    <p className="text-[11px] text-slate-400 mt-1">
+                    <p className="text-[11px] text-slate-600 font-normal mt-1">
                       Exporta el vídeo en MP4 limpio con fondo negro para combinar fácilmente en cualquier editor de vídeo.
                     </p>
                   </div>
@@ -648,9 +648,9 @@ export const ExportModal: React.FC<Props> = ({
 
               <button
                 onClick={startExport}
-                className="w-full py-3 px-4 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-sm shadow-lg shadow-teal-500/20 transition flex items-center justify-center gap-2"
+                className="w-full py-3 px-4 rounded-xl bg-[#24C87F] hover:bg-[#1fb874] text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2"
               >
-                <Sparkles className="w-4 h-4" />
+                <Sparkles className="w-4 h-4 text-white" />
                 <span>Iniciar Procesamiento de Rótulo</span>
               </button>
             </>
@@ -659,20 +659,20 @@ export const ExportModal: React.FC<Props> = ({
           {/* Rendering Progress */}
           {isRendering && (
             <div className="py-8 space-y-4 text-center">
-              <Loader2 className="w-10 h-10 text-teal-400 animate-spin mx-auto" />
+              <Loader2 className="w-10 h-10 text-[#24C87F] animate-spin mx-auto" />
               <div>
-                <h4 className="font-bold text-slate-200 text-sm">
+                <h4 className="font-bold text-slate-900 text-sm">
                   Procesando Fotogramas a 60 FPS...
                 </h4>
-                <p className="text-xs text-slate-400 mt-1 font-mono">
+                <p className="text-xs text-slate-600 mt-1 font-mono">
                   Fotograma {currentFrame} de {totalFrames} ({progress}%)
                 </p>
               </div>
 
               {/* Progress Bar */}
-              <div className="w-full h-3 bg-slate-950 rounded-full overflow-hidden border border-slate-800 p-0.5">
+              <div className="w-full h-3 bg-slate-100 rounded-full overflow-hidden border border-slate-200 p-0.5">
                 <div
-                  className="h-full bg-gradient-to-r from-teal-500 to-emerald-400 rounded-full transition-all duration-75"
+                  className="h-full bg-[#24C87F] rounded-full transition-all duration-75"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -682,15 +682,15 @@ export const ExportModal: React.FC<Props> = ({
           {/* Download Complete Ready */}
           {!isRendering && downloadUrl && (
             <div className="py-6 space-y-5 text-center">
-              <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center mx-auto">
-                <Check className="w-6 h-6" />
+              <div className="w-12 h-12 rounded-full bg-[#24C87F] text-white border border-[#24C87F] flex items-center justify-center mx-auto shadow-md">
+                <Check className="w-6 h-6 stroke-[3]" />
               </div>
 
               <div>
-                <h4 className="font-bold text-slate-100 text-base">
+                <h4 className="font-bold text-slate-900 text-base">
                   ¡Rótulo Renderizado con Éxito!
                 </h4>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-slate-600 mt-1">
                   Tu archivo está listo para descargar e importar en tu editor de vídeo.
                 </p>
               </div>
@@ -698,15 +698,15 @@ export const ExportModal: React.FC<Props> = ({
               <a
                 href={downloadUrl}
                 download={downloadFileName}
-                className="w-full py-3.5 px-4 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-sm shadow-lg shadow-teal-500/25 transition flex items-center justify-center gap-2 text-center font-bold"
+                className="w-full py-3.5 px-4 rounded-xl bg-[#24C87F] hover:bg-[#1fb874] text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2 text-center"
               >
-                <Download className="w-4 h-4 inline" />
+                <Download className="w-4 h-4 inline text-white" />
                 <span>Descargar {downloadFileName}</span>
               </a>
 
               <button
                 onClick={() => setDownloadUrl(null)}
-                className="text-xs text-slate-400 hover:text-slate-200 block mx-auto pt-2"
+                className="text-xs text-slate-600 hover:text-slate-900 underline block mx-auto pt-2"
               >
                 Elegir otro formato
               </button>
