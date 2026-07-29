@@ -125,10 +125,10 @@ export const EditorPanel: React.FC<Props> = ({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <button
                   onClick={() => {
-                    updateConfig('subtitle', 'Miembro de Coordinadora Local Jerez');
+                    updateConfig('subtitle', 'Miembro Coordinadora Local Jerez');
                   }}
                   className={`p-2.5 rounded-xl border text-left transition flex items-center gap-2 ${
-                    config.subtitle === 'Miembro de Coordinadora Local Jerez'
+                    config.subtitle === 'Miembro Coordinadora Local Jerez'
                       ? 'border-[#24C87F] bg-[#24C87F]/10 ring-2 ring-[#24C87F] font-bold text-slate-900'
                       : 'border-slate-200 bg-white hover:border-slate-300 text-slate-700'
                   }`}
@@ -136,7 +136,7 @@ export const EditorPanel: React.FC<Props> = ({
                   <UserCheck className="w-4 h-4 text-[#24C87F] shrink-0" />
                   <div className="text-[11px] leading-tight">
                     <span className="font-bold block text-slate-900">Coordinadora Local</span>
-                    <span className="text-[10px] text-slate-500 truncate block">Miembro de Coordinadora Local Jerez</span>
+                    <span className="text-[10px] text-slate-500 truncate block">Miembro Coordinadora Local Jerez</span>
                   </div>
                 </button>
 
@@ -183,7 +183,7 @@ export const EditorPanel: React.FC<Props> = ({
                 type="text"
                 value={config.subtitle}
                 onChange={(e) => updateConfig('subtitle', e.target.value)}
-                placeholder="Ej: Miembro de Coordinadora Local Jerez"
+                placeholder="Ej: Miembro Coordinadora Local Jerez"
                 className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder-slate-400 text-sm font-medium focus:outline-none focus:border-[#24C87F] focus:ring-1 focus:ring-[#24C87F] transition shadow-sm"
               />
             </div>

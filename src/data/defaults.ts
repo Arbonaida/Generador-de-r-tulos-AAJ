@@ -34,7 +34,7 @@ export const DEFAULT_PROFILES: SavedProfile[] = [
     config: {
       ...DEFAULT_CONFIG,
       title: 'Nombre y Apellidos',
-      subtitle: 'Miembro de Coordinadora Local Jerez',
+      subtitle: 'Miembro Coordinadora Local Jerez',
       squareImage: '/logo-aaj.jpg',
       useImage: true,
     },
